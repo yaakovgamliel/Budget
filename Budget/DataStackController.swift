@@ -31,7 +31,7 @@ class DataStackController  {
         var failureReason = "There was an error creating or loading the application's saved data."
         if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
             coordinator = nil
-            // Report any error we got.
+            
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
@@ -67,9 +67,7 @@ class DataStackController  {
         
         return mainQueueContext
     }()
-    
-    // MARK: - Core Data Saving support
-    
+        
     func saveContext () {
         if let moc = self.mainQueueManagedContext {
             var error: NSError? = nil

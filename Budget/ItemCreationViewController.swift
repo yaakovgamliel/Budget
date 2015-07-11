@@ -16,6 +16,12 @@ class ItemCreationViewController: UIViewController {
     @IBOutlet weak var itemPrice: UITextField!
     @IBOutlet weak var itemDescriptionByUser: UITextField!
     
+    //MARK: - ViewController methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     //MARK: - IBActions
     
     @IBAction func doneButtonTouched(sender: AnyObject) {
@@ -25,7 +31,7 @@ class ItemCreationViewController: UIViewController {
         }
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-           
+            
         })
     }
     
@@ -34,12 +40,6 @@ class ItemCreationViewController: UIViewController {
         
         Item.createItem(itemName, price: itemPrice)
         
-    }
-    
-    //MARK: - ViewController methods
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 
 }

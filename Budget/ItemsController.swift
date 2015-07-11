@@ -27,14 +27,9 @@ class ItemsController  {
         return stack.mainQueueManagedContext!.executeFetchRequest(fetch, error: &error)
     }()
     
-    deinit {
-       println("bye!!!!!!!!!!!!!!!!!!!")
-    }
-    
     init() {
         var stack = DataStackController()
         controllerContext = stack.mainQueueManagedContext!
-        controllerContext.name = "Items Controller Context"
     }
     
     func itemLoader() -> [Item]? {
