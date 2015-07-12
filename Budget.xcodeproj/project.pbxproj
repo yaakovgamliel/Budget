@@ -75,6 +75,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D73D7BFF1B52F45B00FAC4DE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D73E5D4D1B1E46C40012C082 /* DataStackController.swift */,
+				D7B83CE81B46B7E500D4F8B7 /* ItemsController.swift */,
+				D7F19E721B2E24DB009EEFF9 /* ItemCreationViewController.swift */,
+				D7F19E701B2E2375009EEFF9 /* ItemsTableViewController.swift */,
+				D7A76D8D1B4FDB0D0042B20A /* BaseTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D73D7C001B52F47700FAC4DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D7B83CEA1B46C3B700D4F8B7 /* ItemProxy.swift */,
+				D73E5D581B1E53D30012C082 /* Item.swift */,
+				D73E5D571B1E53D30012C082 /* _Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D73E5D1C1B1E46530012C082 = {
 			isa = PBXGroup;
 			children = (
@@ -97,15 +119,9 @@
 		D73E5D271B1E46530012C082 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
-				D7F19E701B2E2375009EEFF9 /* ItemsTableViewController.swift */,
-				D7A76D8D1B4FDB0D0042B20A /* BaseTableViewController.swift */,
-				D7B83CE81B46B7E500D4F8B7 /* ItemsController.swift */,
-				D7F19E721B2E24DB009EEFF9 /* ItemCreationViewController.swift */,
-				D73E5D571B1E53D30012C082 /* _Item.swift */,
-				D73E5D581B1E53D30012C082 /* Item.swift */,
-				D7B83CEA1B46C3B700D4F8B7 /* ItemProxy.swift */,
 				D73E5D2A1B1E46530012C082 /* AppDelegate.swift */,
-				D73E5D4D1B1E46C40012C082 /* DataStackController.swift */,
+				D73D7C001B52F47700FAC4DE /* Model */,
+				D73D7BFF1B52F45B00FAC4DE /* Controller */,
 				D7871F5F1B4FFD98003ADAD7 /* ItemUtils.swift */,
 				D73E5D311B1E46530012C082 /* Main.storyboard */,
 				D73E5D341B1E46530012C082 /* Images.xcassets */,

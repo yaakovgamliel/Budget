@@ -14,7 +14,7 @@ class ItemsController  {
     
     let controllerContext: NSManagedObjectContext
     var proxyItems: [ItemProxy] = []
-    var someItems: [Item]?
+    var extraItemsContainer: [Item]?
     
     lazy var someOtherItems: [AnyObject]? = {
         var error: NSError?
@@ -32,24 +32,6 @@ class ItemsController  {
         controllerContext = stack.mainQueueManagedContext!
     }
     
-    func itemLoader() -> [Item]? {
-        
-        var pep: [Item]?
-        
-        let fetch  = NSFetchRequest(entityName: Item.entityName())
-        
-        fetch.returnsObjectsAsFaults = false
-        
-        var error: NSError?
-        if let fetchedResults = controllerContext.executeFetchRequest(fetch, error: &error) as? [Item] {
-            
-            return fetchedResults
-            
-        } else {
-            
-            return nil
-        }
-    }
     
     func itemLoaderWithCompletion(completionClosure: (results: [Item]?) -> ()) {
         
@@ -66,14 +48,4 @@ class ItemsController  {
             
         }
     }
-
-    func proxyItemsContainerBuilder(resultRequest: [Item]) -> [ItemProxy] {
-        for item in resultRequest {
-            var bob = ItemProxy(itemName: item.itemName(), itemPrice: item.itemPrice())
-            proxyItems.append(bob)
-        }
-        
-        return proxyItems
-    }
-
 }
