@@ -18,19 +18,50 @@ public class Item: _Item {
         
         myStack.saveContext()
         
+        
         return myCurrentItem!
+    }
+    
+    class func createItemBlock(name: String, price: Float, description: String?) {
+        
+        var myStack: DataStackController = DataStackController()
+
+        var privateContext = DataStackController().privateQueueManagedContext
+        
+        privateContext?.performBlockAndWait({ () -> Void in
+        
+        var myCurrentItem : Item? = self.init( entity: Item.entity(privateContext), insertIntoManagedObjectContext: privateContext)
+            
+            myCurrentItem!.name = name
+            myCurrentItem!.price = price
+            
+            privateContext?.save(nil)
+        })
+
     }
 
     class func deleteItem(item: Item) -> Bool {
         
-        let myStack: DataStackController = DataStackController.init()
-        let context: NSManagedObjectContext! = myStack.mainQueueManagedContext
-        
-        context.deleteObject(item)
-       
-        var error: NSError?
-        
-        return context.save(&error)
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            
+            let myStack: DataStackController = DataStackController.init()
+            
+            var privateContext = DataStackController().privateQueueManagedContext
+            
+            privateContext?.performBlockAndWait({ () -> Void in
+                
+                if let itemToDelete = privateContext?.existingObjectWithID(item.objectID, error: nil) as! Item? {
+                    
+                    privateContext?.deleteObject(itemToDelete)
+                    
+                    privateContext?.save(nil)
+                    
+                }
+            })
+        }
+
+        return true
     }
     
     public func itemLooks(item: Item) {

@@ -38,8 +38,22 @@ class ItemCreationViewController: UIViewController {
     
     func addNewItem(itemName: String, itemPrice: Float) {
         
-        Item.createItem(itemName, price: itemPrice)
+//        Item.createItem(itemName, price: itemPrice)
         
+        
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            
+            
+            
+            Item.createItemBlock(itemName, price: itemPrice, description: nil)
+
+            
+            // do some task
+//            dispatch_async(dispatch_get_main_queue()) {
+//                // update some UI
+//            }
+        }
     }
 
 }

@@ -85,6 +85,10 @@ class ItemsTableViewController: UITableViewController {
         if editingStyle == .Delete {
 
             
+            var item = self.itemsContainer[indexPath.row]
+            
+            Item.deleteItem(item)
+            
             self.itemsContainer.removeAtIndex(indexPath.row)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)

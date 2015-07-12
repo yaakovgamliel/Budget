@@ -64,12 +64,36 @@ class DataStackController  {
         
         var mainQueueContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         mainQueueContext.persistentStoreCoordinator = coordinator
+        mainQueueContext.name = "main queue"
         
         return mainQueueContext
     }()
+    
+    lazy var privateQueueManagedContext: NSManagedObjectContext? = {
         
+        let coordinator = self.persistentStoreCoordinator
+        if coordinator == nil {
+            return nil;
+        }
+        
+        var privateQueueManagedContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateQueueManagedContext.persistentStoreCoordinator = coordinator
+        privateQueueManagedContext.name = "private queue"
+        
+        return privateQueueManagedContext
+    }()
+    
     func saveContext () {
         if let moc = self.mainQueueManagedContext {
+            var error: NSError? = nil
+            if moc.hasChanges && !moc.save(&error) {
+                NSLog("Unresolved error \(error), \(error!.userInfo)")
+            }
+        }
+    }
+    
+    func savePrivateContext () {
+        if let moc = self.privateQueueManagedContext {
             var error: NSError? = nil
             if moc.hasChanges && !moc.save(&error) {
                 NSLog("Unresolved error \(error), \(error!.userInfo)")
